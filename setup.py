@@ -3,6 +3,7 @@ setup(
     name = 'gaanacli',
     packages = ['gaanacli'],
     version = '0.1',
+    scripts=['bin/gaanacli'],
     description = 'Open chrome tab and play youtube song directly from CLI',
     author = 'Karan Dev',
     author_email = 'karandev43@gmail.com',

@@ -1,10 +1,14 @@
 # Created By - Karan Dev
 # Date - Feb 22, 2017
+import logging
+
+logging.captureWarnings(True)
 
 import sys
 import webbrowser
 import requests
 import re
+import os
 
 YOUTUBE_URL = 'https://youtube.com'
 # https://www.youtube.com/results?search_query=cheap+thrills
@@ -31,7 +35,16 @@ class GaanaCli:
             print "No song found"
             return 0
         link_list = result[0].replace('href="', '')
-        webbrowser.open( YOUTUBE_URL + link_list )
+
+        savout = os.dup(1)
+        os.close(1)
+        os.open(os.devnull, os.O_RDWR)
+        try:
+            webbrowser.open( YOUTUBE_URL + link_list, new=0, autoraise=False )
+            print "Song played."
+        finally:
+            os.dup2(savout, 1)
+
 
 def main():
     obj = GaanaCli()
